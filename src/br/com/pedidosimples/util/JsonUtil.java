@@ -18,6 +18,7 @@ public class JsonUtil {
 		JSONObject joPedidos  = null;
 		JSONArray jaArray = null;		
 		List<Pedido> pedidos = new ArrayList<Pedido>(); 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
 			joPedidos = new JSONObject(json);
@@ -30,7 +31,8 @@ public class JsonUtil {
 						
 						Pedido pedidoInserir = new Pedido();				
 						pedidoInserir.setNumeroControle(Integer.parseInt(jsonPedido.get("numerocontrole").toString()));
-						pedidoInserir.setDataCadastro(new SimpleDateFormat().parse(jsonPedido.get("datacadastro").toString()));
+						pedidoInserir.setCodigoCliente(jsonPedido.getInt("codigocliente"));
+						pedidoInserir.setDataCadastro(sdf.parse(jsonPedido.get("datacadastro").toString()));
 						pedidoInserir.setNomeProduto(jsonPedido.get("nomeproduto").toString());
 						pedidoInserir.setQuantidade(Double.valueOf(jsonPedido.get("quantidade").toString()));
 						pedidoInserir.setValor(Double.valueOf(jsonPedido.get("valor").toString()));
@@ -50,7 +52,8 @@ public class JsonUtil {
 				Pedido pedidoInserir = new Pedido();
 				joPedidos = joPedidos.getJSONObject("pedido");
 				pedidoInserir.setNumeroControle(Integer.parseInt(joPedidos.getString("numerocontrole").toString()));
-				//pedidoInserir.setDataCadastro(new SimpleDateFormat().parse(joPedidos.get("datacadastro").toString()));
+				pedidoInserir.setDataCadastro(sdf.parse(joPedidos.get("datacadastro").toString()));
+				pedidoInserir.setCodigoCliente(joPedidos.getInt("codigocliente"));
 				pedidoInserir.setNomeProduto(joPedidos.get("nomeproduto").toString());
 				pedidoInserir.setQuantidade(Double.valueOf(joPedidos.get("quantidade").toString()));
 				pedidoInserir.setValor(Double.valueOf(joPedidos.get("valor").toString()));
