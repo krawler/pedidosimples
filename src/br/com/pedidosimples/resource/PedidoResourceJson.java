@@ -32,20 +32,6 @@ public class PedidoResourceJson {
 		return new PedidoController().listarTodosPedidos();
 	}
 	
-	@GET
-	@Path("/pedidos/numero-controle/{numeroControle}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Pedido> getPedidosByNumeroControle(@PathParam("numeroControle") Long numeroControle){
-		return new PedidoController().listarPedidosPorNumeroControle(numeroControle);
-	}
-	
-	@GET
-	@Path("/pedidos/data-cadastro/{dataCadastro}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Pedido> getPedidosByDataCadastro(@PathParam("dataCadastro") String dataCadastro){
-		return new PedidoController().listarPedidosByDataCadastro(dataCadastro);
-	}
-	
     @POST
 	@Path("/send")
     @Consumes(MediaType.APPLICATION_JSON)

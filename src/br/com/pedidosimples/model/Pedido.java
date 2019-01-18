@@ -40,7 +40,7 @@ public class Pedido implements Serializable {
 	@Id
 	private long numeroControle;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro = Calendar.getInstance().getTime();
 	
 	private String nomeProduto;

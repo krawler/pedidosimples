@@ -34,30 +34,16 @@ public class PedidoController {
 		return null;
 	}
 	
-	//proxima alteracao metodo retornara string
-	public boolean inserirPedidoDeJson(Pedido pedido) throws Exception{		
+	//proxima alteração metodo retornara string
+	public boolean inserirPedidoDeJson(Pedido pedido) throws Exception{	
 		
-		pedido = this.aplicaRegrasPedido(pedido);				
-		return PedidoDao.getInstance().salvarPedido(pedido);		
-	}
-	
-	public boolean inserirPedidoDeXML(Pedido pedido){
-		try{
-		 	return PedidoDao.getInstance().salvarPedido(pedido);
-		}catch(Exception e){
-			return false;
-		}
-	}
-	
-	
-	private Pedido aplicaRegrasPedido(Pedido pedido) throws Exception {
 		
 		if (null == pedido.getQuantidade() || pedido.getQuantidade() < 1){
 			pedido.setQuantidade(1.0);
 		}
 		
 		if(PedidoDao.getInstance().lista("numeroControle", pedido.getNumeroControle()).size() > 0){
-		   return null;	
+		   return false;	
 		}
 		
 		if (null == pedido.getDataCadastro()){
@@ -78,64 +64,36 @@ public class PedidoController {
 		
 		//codigo do cliente de 1 a 10, apos o metodo passar a retorna string exibir msg de erro
 		if(pedido.getCodigoCliente() > 10 || pedido.getCodigoCliente() < 1){
-		   return null;	
+		   return false;	
 		}
 		
-		return pedido;
+		return PedidoDao.getInstance().salvarPedido(pedido);		
 	}
 	
-	//proxima alteracao metodo retornara string
+	public boolean inserirPedidoDeXML(Pedido pedido){
+		try{
+		 	return PedidoDao.getInstance().salvarPedido(pedido);
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	//proxima alteração metodo retornara string
 	public boolean atualizarPedidoDeJson(Pedido pedido) throws Exception{
 			
-		pedido = this.aplicaRegrasPedido(pedido);
+		if (null == pedido.getQuantidade() || pedido.getQuantidade() < 1){
+			pedido.setQuantidade(1.0);
+		}
+				
+		if (null == pedido.getDataCadastro()){
+			pedido.setDataCadastro(Calendar.getInstance().getTime());
+		}
+		
+		//setar valor total
+		//se quantidade > 5 desconto de 5% no total
 		
 		return PedidoDao.getInstance().atualizarPedido(pedido);
 		
-	}
-	
-
-	public List<Pedido> listarTodosPedidos(Long numeroControle) {
-		List<Pedido> pedidos = null;
-		try{
-			 pedidos = PedidoDao.getInstance().lista("numeroControle", numeroControle);
-			 if(pedidos.size() > 0){
-				return pedidos;
-			 }
-		}catch(Exception e){
-			return null;
-		}
-		
-		
-		return null;
-	}
-	
-	public List<Pedido> listarPedidosPorNumeroControle(Long numeroControle) {
-		List<Pedido> pedidos = null;
-		try{
-			 pedidos = PedidoDao.getInstance().lista("numeroControle", numeroControle);
-			 if(pedidos.size() > 0){
-				return pedidos;
-			 }
-		}catch(Exception e){
-			return null;
-		}
-		
-		
-		return null;
-	}
-
-	public List<Pedido> listarPedidosByDataCadastro(String dataCadastro) {
-		List<Pedido> pedidos = null;
-		try{
-			 pedidos = PedidoDao.getInstance().lista("dataCadastro", dataCadastro);
-			 if(pedidos.size() > 0){
-				return pedidos;
-			 }
-		}catch(Exception e){
-			return null;
-		}
-		
-		return null;
 	}
 	
 	
