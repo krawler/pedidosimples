@@ -43,7 +43,7 @@ public class PedidoResourceJson {
 	@Path("/pedidos/data-cadastro/{dataCadastro}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pedido> getPedidosByDataCadastro(@PathParam("dataCadastro") String dataCadastro){
-		return new PedidoController().listarPedidosByDataCadastro(dataCadastro);
+		return new PedidoController().listarPedidosPorDataCadastro(dataCadastro);
 	}
 	
     @POST
@@ -54,14 +54,12 @@ public class PedidoResourceJson {
     	List<Pedido> pedidos = JsonUtil.deserializeJsonToPedido(json);
     	try {
     		for (Pedido pedido : pedidos) {
-    			new PedidoController().inserirPedidoDeJson(pedido);	
-				   	
+    			new PedidoController().inserirPedidoDeJson(pedido);				   	
 			}			
 		} catch (Exception e) {			
 			e.printStackTrace();
 			return Response.status(200).entity("Erro ao inserir pedido: " + e.getMessage()).build();
-		}
-    
+		}    
     	return Response.status(200).entity("Pedido inserido com sucesso").build();
 	} 
 

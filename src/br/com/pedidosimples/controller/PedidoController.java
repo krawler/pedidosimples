@@ -1,18 +1,11 @@
 package br.com.pedidosimples.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 
 import br.com.pedidosimples.dao.PedidoDao;
-import br.com.pedidosimples.json.JSONArray;
-import br.com.pedidosimples.json.JSONException;
-import br.com.pedidosimples.json.JSONObject;
 import br.com.pedidosimples.model.Pedido;
-import br.com.pedidosimples.model.SessaoRFID;
 import br.com.pedidosimples.util.JsonUtil;
 
 public class PedidoController {
@@ -89,8 +82,7 @@ public class PedidoController {
 			
 		pedido = this.aplicaRegrasPedido(pedido);
 		
-		return PedidoDao.getInstance().atualizarPedido(pedido);
-		
+		return PedidoDao.getInstance().atualizarPedido(pedido);		
 	}
 	
 
@@ -118,16 +110,14 @@ public class PedidoController {
 			 }
 		}catch(Exception e){
 			return null;
-		}
-		
-		
+		}		
 		return null;
 	}
 
-	public List<Pedido> listarPedidosByDataCadastro(String dataCadastro) {
+	public List<Pedido> listarPedidosPorDataCadastro(String dataCadastro) {
 		List<Pedido> pedidos = null;
 		try{
-			 pedidos = PedidoDao.getInstance().lista("dataCadastro", dataCadastro);
+			 pedidos = PedidoDao.getInstance().listaPorData("dataCadastro", dataCadastro);
 			 if(pedidos.size() > 0){
 				return pedidos;
 			 }

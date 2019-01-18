@@ -35,7 +35,7 @@ public class PedidoResourceXML {
 	@Path("/pedidos/data-cadastro/{dataCadastro}")
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Pedido> getPedidosByDataCadastro(@PathParam("dataCadastro") String dataCadastro){
-		return new PedidoController().listarPedidosByDataCadastro(dataCadastro);
+		return new PedidoController().listarPedidosPorDataCadastro(dataCadastro);
 	}
 	
 	@POST

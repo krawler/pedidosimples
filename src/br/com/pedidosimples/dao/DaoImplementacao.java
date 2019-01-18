@@ -1,5 +1,6 @@
 package br.com.pedidosimples.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,6 +98,15 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 		sessionFactory.getCurrentSession().beginTransaction();
 		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(getPersistenceClass());
 		criteria.add(Restrictions.like(campoBanco, valorCampo));
+		criteria.addOrder(Order.asc("id"));
+		return criteria.list();
+	}
+	
+	public List<T> listaPorData(String campoBanco, String valorCampo) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sessionFactory.getCurrentSession().beginTransaction();
+		Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(getPersistenceClass());
+		criteria.add(Restrictions.eq(campoBanco, sdf.parse(valorCampo)));
 		criteria.addOrder(Order.asc("id"));
 		return criteria.list();
 	}
