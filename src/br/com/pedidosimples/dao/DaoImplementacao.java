@@ -116,10 +116,14 @@ public abstract class DaoImplementacao<T> implements DaoInterface<T> {
 	@Override
 	public List<T> listaLikeExpression(String campoBanco, String valorCampo)
 			throws Exception {
-		 
+		try{
+			getSessionFactory().getCurrentSession().beginTransaction(); 
 		return getSessionFactory().
 				getCurrentSession().
 				createQuery(" select a from " + getPersistenceClass().getSimpleName() + " a where a." + campoBanco + " like'%" + valorCampo + "%'").list();
+		}finally{
+			getSessionFactory().getCurrentSession().getTransaction().commit();
+		}
 	}
 	
 	

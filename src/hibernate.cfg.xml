@@ -22,7 +22,7 @@ org.hibernate.dialect.PostgreSQLDialect
 		<property name="hibernate.jdbc.batch_size">100</property> <!-- Lote de SQL -->
 		<property name="hibernate.cache.use_second_level_cache">true</property> <!-- Cache -->
 		<property name="hibernate.transaction.auto_close_session">true</property> <!-- Fecha sessão automaticamente -->
-		<property name="hibernate.hbm2ddl.auto">update</property> 
+		<property name="hibernate.hbm2ddl.auto">validate</property> 
 		<property name="hibernate.show_sql">true</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.generate_statistics">false</property> <!-- Estatisticas de processos SQL -->
